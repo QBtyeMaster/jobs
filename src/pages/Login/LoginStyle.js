@@ -14,7 +14,7 @@ export default StyleSheet.create({
     width: 190,
     height: '80%',
     resizeMode: 'stretch',
-    tintColor: 'rgba(242, 83, 68, 0.2)'
+    tintColor: 'rgba(242, 83, 68, 0.3)'
   },
   appLoginFormWrapper: {
     flex: 2,

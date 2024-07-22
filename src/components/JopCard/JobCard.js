@@ -3,10 +3,14 @@ import {TouchableWithoutFeedback, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import style from './JobCardStyle';
 
-const jobCard = ({job}) => {
+const jobCard = ({job, navigation}) => {
+  const handleJobClick = () => {
+    navigation.navigate("JobDetail", job)
+  }
+
   const location = job.locations.length == 0 ? "Remote" : job.locations[0].name;
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={handleJobClick}>
       <View style={style.container}>
         <View style={style.jobHeaderContainer}>
           <Text style={style.jobHeader}>{job.name}</Text>

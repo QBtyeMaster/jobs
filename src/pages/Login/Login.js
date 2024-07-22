@@ -49,7 +49,6 @@ const Login = () => {
         <Image
           style={Style.logoImage}
           source={require('../../../assets/images/worker.png')}
-          
         />
       </View>
       <Formik
@@ -62,7 +61,7 @@ const Login = () => {
                 <TextInput
                   onChangeText={handleChange('username')}
                   style={Style.input}
-                  placeholder="User Name..."
+                  placeholder="Username..."
                   placeholderTextColor={'#a5a5a5'}
                   autoCapitalize="none"
                   value={values.username}
@@ -87,7 +86,7 @@ const Login = () => {
                   activeOpacity={0.8}
                   >
                     {loading?(
-                      <Text style={Style.loginFormSubmitText}>Giriş Yap</Text>
+                      <Text style={Style.loginFormSubmitText}>Singin</Text>
                     ):(
                     <ActivityIndicator size="small" color="#0E1B26" />
                     )}

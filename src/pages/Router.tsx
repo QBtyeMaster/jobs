@@ -7,6 +7,7 @@ import Home from './Home/Home';
 import Favorite from './Favorite/Favorite';
 import Settings from './Settings/Settings';
 import Login from './Login/Login';
+import JobDetail from './JobsDetail/JobDetail';
 import useAuthStore from '../store/useAuthStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loading from '../components/loading';
@@ -20,7 +21,6 @@ const Router = () => {
   const userSession = useAuthStore(state => state.singinUser);
   const authLoading = useAuthStore(state => state.authLoading);
   const setAuthLoading = useAuthStore(state => state.setLoading);
-
 
   useEffect(() => {
     const checkSession = async () => {
@@ -39,6 +39,27 @@ const Router = () => {
     checkSession();
   }, []);
 
+  const HomeStack = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Jobs"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="JobDetail"
+          component={JobDetail}
+          options={{
+            headerTitle: 'Job Details', 
+            headerTintColor: '#F25244',
+            headerStyle:{ backgroundColor: '#F0F1F2'}
+          }}
+        />
+      </Stack.Navigator>
+    );
+  };
+
   return (
     <NavigationContainer>
       {authLoading ? (
@@ -54,10 +75,10 @@ const Router = () => {
       ) : (
         <Drawer.Navigator
           drawerContent={props => <CustomDrawer {...props} />}
-          initialRouteName="home_page"
+          initialRouteName="JobsPage"
           screenOptions={{
             headerShown: false,
-            drawerLabelStyle:{marginLeft: -25},
+            drawerLabelStyle: {marginLeft: -25},
             drawerActiveTintColor: '#ffffff',
             drawerActiveBackgroundColor: '#F2421B',
             drawerInactiveTintColor: '#0D0D0D',
@@ -66,10 +87,12 @@ const Router = () => {
             },
           }}>
           <Drawer.Screen
-            name="home_page"
-            component={Home}
+            name="JobsPage"
+            component={HomeStack}
             options={{
-              drawerIcon: (p) => (<Icon name="home-outline" size={22} color={p.color}/>),
+              drawerIcon: p => (
+                <Icon name="home-outline" size={22} color={p.color} />
+              ),
               title: 'Worker Home Page',
               headerStyle: {
                 backgroundColor: '#F0F1F2',
@@ -77,14 +100,15 @@ const Router = () => {
                 elevation: 0,
               },
               headerTintColor: '#F25244',
-              
             }}
           />
           <Drawer.Screen
             name="favorite-jobs"
             component={Favorite}
             options={{
-              drawerIcon:  (p) => (<Icon name="heart-multiple-outline" size={22} color={p.color}/>),
+              drawerIcon: p => (
+                <Icon name="heart-multiple-outline" size={22} color={p.color} />
+              ),
               title: 'My Favorite Jobs',
               headerStyle: {
                 backgroundColor: '#F0F1F2',
@@ -98,7 +122,9 @@ const Router = () => {
             name="settings_page"
             component={Settings}
             options={{
-              drawerIcon:  (p) => (<Icon name="cog-outline" size={22} color={p.color}/>),
+              drawerIcon: p => (
+                <Icon name="cog-outline" size={22} color={p.color} />
+              ),
               title: 'Settings',
               headerStyle: {
                 backgroundColor: '#F0F1F2',

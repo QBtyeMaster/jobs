@@ -12,7 +12,7 @@ const Home = ({navigation}) => {
   const [page, setPage] = useState(1);
   const [jobs, setJobs] = useState([]);
   const {data, loading, error} = useFetch(
-    `https://www.themuse.com/api/public/jobs?page=${page}`,
+    `https://www.themuse.com/api/public/jobs?page=${page}`
   );
 
   const handleLoadMore = () => {
@@ -25,7 +25,7 @@ const Home = ({navigation}) => {
   }, [data, loading]);
 
   const jobRender = ({item}) => {
-    return <JobCard job={item} />;
+    return <JobCard job={item} navigation={navigation} />;
   };
 
   if (loading && page === 1) {
